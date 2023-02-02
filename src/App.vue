@@ -7,7 +7,7 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
   <NavBar />
-  <WallPaper backdrop="Nigeria Decides! 2022" />
+  <WallPaper backdrop="Nigeria Decides! 2023" />
   <header>
     <img alt="Vue logo" class="logo" src="./assets/ballot.png" width="125" height="125" />
     <div class="wrapper">

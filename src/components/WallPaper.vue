@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-    backdrop: {
+    backdrop:  {
         type: String
     }
 })

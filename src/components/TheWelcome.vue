@@ -1,10 +1,79 @@
 <script setup>
 import WelcomeItem from './WelcomeItem.vue'
 import { ref } from 'vue'
+import { computed } from '@vue/reactivity';
+import { onMounted } from 'vue';
 
-const countA = ref(0)
-const countB = ref(0)
-const countC = ref(0)
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      candidate1: 0,
+      candidate2: 0,
+      candidate3: 0,
+      pressed: false,
+    };
+  },
+
+
+  mounted() {
+    //No. 3 
+    this.setCandidate();
+  },
+
+
+   methods: {
+    //No 4 Reads data saved into candidate values from the memory card
+    setCandidate() {
+      let savedCandidate1 = localStorage.getItem("candidate1");
+      if (savedCandidate1) this.candidate1 = Number(savedCandidate1);
+
+      let savedCandidate2 = localStorage.getItem("candidate2");
+      if (savedCandidate2) this.candidate2 = Number(savedCandidate2);
+
+      let savedCandidate3 = localStorage.getItem("candidate3");
+      if (savedCandidate3) this.candidate3 = Number(savedCandidate3);
+    },
+
+    warnUser() {
+      alert('You are part of the problem of this country. How many times do you want to vote for your favorite candidate');
+    },
+
+    //No. 2 Assign the functionality of the button based off the inherent value of the button
+    handleClick(value) {
+
+      switch (value) {
+
+        case 'candidate1':
+          this.candidate1++;
+          localStorage.setItem("candidate1", this.candidate1);
+          break;
+
+        case 'candidate2':
+          this.candidate2++;
+          localStorage.setItem("candidate2", this.candidate2);
+          break;
+
+        case 'candidate3':
+          this.candidate3++;
+          localStorage.setItem("candidate3", this.candidate3);
+          break;
+      };
+    },
+   
+    press() {
+    this.pressed = true;
+    console.log(this.pressed);
+  },
+
+  }
+}
+
+
+
+
 </script>
 
 <template>
@@ -13,7 +82,7 @@ const countC = ref(0)
       <img src="../assets/peter.jpg" class="card-img-top" alt="...">
       <div class="card-body">
         <div class="inner-left">
-          <h1 class="card-title">{{ countA }}</h1>
+          <h1 class="card-title">{{ candidate1 }}</h1>
           <p class="card-title">votes</p>
         </div>
 
@@ -23,7 +92,8 @@ const countC = ref(0)
         </div>
       </div>
 
-      <a href="#" v-on:click.once="countA++" class="btn btn-primary">Vote</a>
+      <!-- No. 1 Runs the handleClick function on any click event-->
+      <a href="#" @click.once="handleClick('candidate1')" class="btn btn-primary">Vote</a>
     </div>
   </WelcomeItem>
 
@@ -32,7 +102,7 @@ const countC = ref(0)
       <img src="../assets/tinubu.png" class="card-img-top" alt="...">
       <div class="card-body">
         <div class="inner-left">
-          <h1 class="card-title">{{ countB }}</h1>
+          <h1 class="card-title">{{ candidate2 }}</h1>
           <p class="card-title">votes</p>
         </div>
 
@@ -41,7 +111,7 @@ const countC = ref(0)
           <h6 class="card-title">All Progressive Congress</h6>
         </div>
       </div>
-      <a href="#" v-on:click.once="countB++" class="btn btn-primary">Vote</a>
+      <a href="#" @click.once="handleClick('candidate2')" class="btn btn-primary">Vote</a>
     </div>
   </WelcomeItem>
 
@@ -50,7 +120,7 @@ const countC = ref(0)
       <img src="../assets/atiku.png" class="card-img-top" alt="...">
       <div class="card-body">
         <div class="inner-left">
-          <h1 class="card-title">{{ countC }}</h1>
+          <h1 class="card-title">{{ candidate3 }}</h1>
           <p class="card-title">votes</p>
         </div>
 
@@ -59,7 +129,8 @@ const countC = ref(0)
           <h6 class="card-title">People's Democratic Party</h6>
         </div>
       </div>
-      <a href="#" v-on:click.once="countC++" class="btn btn-primary">Vote</a>
+      <a href="#" @click.once="handleClick('candidate3'), press()" class="btn btn-primary">Vote</a>
+      <div v-if="pressed">Presser</div>
     </div>
   </WelcomeItem>
 
