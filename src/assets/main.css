@@ -1,11 +1,7 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: rgb(9, 78, 23) !important;
-  font-weight: normal;
+  
 }
 
 a,
@@ -147,5 +143,8 @@ h1.flyer {
     display: contents;
     grid-template-columns: 1fr 1fr;
     padding: 0 0rem;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
   }
 }
